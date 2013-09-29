@@ -50,13 +50,15 @@ public class RGAMain extends JavaPlugin{
     public void onDisable(){
         //Stop recurring task
         getServer().getScheduler().cancelTask(repeatID);
+        getLogger().info("Time to remove myself...");
+        
     }
     
     public void addArrow(Arrow arw){
         //Add arrow to lists of arrows to be checked
         arrows.add(arw);
         
-        getLogger().info("Time to remove myself...");
+        
     }
     
 }
