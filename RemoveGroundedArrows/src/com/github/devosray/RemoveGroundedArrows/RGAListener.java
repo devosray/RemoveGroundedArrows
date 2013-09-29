@@ -28,7 +28,6 @@ public class RGAListener implements Listener {
         
         //Check if it is not a player-shot arrow
         if (!(evt.getEntity().getShooter() instanceof Player) && evt.getEntity() instanceof Arrow){
-            main.getLogger().info("An arrow has been shot!");
             main.addArrow((Arrow) evt.getEntity());
         }
     }

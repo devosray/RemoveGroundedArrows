@@ -7,7 +7,7 @@ package com.github.devosray.RemoveGroundedArrows;
  */
 
 import java.util.ArrayList;
-import org.bukkit.Server;
+import java.util.Iterator;
 import org.bukkit.entity.Arrow;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,9 +31,16 @@ public class RGAMain extends JavaPlugin{
 
             @Override
             public void run() {
+              
+                for (Arrow arw : arrows){
+                    //Check if collision with ground
+                    if (arw.isOnGround()){
+                        arw.remove();
+                    }
+                }
                 
             }
-        }, 0, 1);
+        }, 0, 5); //Just check arrows every 5 ticks
     }
     
     @Override
