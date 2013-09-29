@@ -19,6 +19,9 @@ public class RGAMain extends JavaPlugin{
     
     @Override
     public void onEnable(){
+        
+        getLogger().info("Starting to remove arrows!");
+        
         //Register listener
         getServer().getPluginManager().registerEvents(listener, this);
         
@@ -52,6 +55,8 @@ public class RGAMain extends JavaPlugin{
     public void addArrow(Arrow arw){
         //Add arrow to lists of arrows to be checked
         arrows.add(arw);
+        
+        getLogger().info("Time to remove myself...");
     }
     
 }
