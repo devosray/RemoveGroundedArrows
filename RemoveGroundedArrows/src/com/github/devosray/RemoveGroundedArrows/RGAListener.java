@@ -4,7 +4,10 @@
  */
 package com.github.devosray.RemoveGroundedArrows;
 
+import org.bukkit.Bukkit;
+import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,12 +27,27 @@ public class RGAListener implements Listener {
     
     @EventHandler
     public void onProjectileLaunchEvent(ProjectileLaunchEvent evt){
-        //When an arrow is shot, add it to an array for ground/collision check
+        //When an arrow is shot, add it to an array for ground/collision check        
+        //Check orgin and compare with config
         
-        //Check if it is not a player-shot arrow
-        if (!(evt.getEntity().getShooter() instanceof Player) && evt.getEntity() instanceof Arrow){
+        //Player
+        if (evt.getEntity().getShooter() instanceof Player && main.getConfig().getBoolean("remove_player_arrows")){
             main.addArrow((Arrow) evt.getEntity());
-        }
+            
+        } else {
+        
+            //Dispenser
+            if (evt.getEntity().getShooter() == null && main.getConfig().getBoolean("remove_dispensed_arrows")){
+                main.addArrow((Arrow) evt.getEntity());
+            }
+
+            //Mob
+            if (evt.getEntity().getShooter() instanceof LivingEntity && main.getConfig().getBoolean("remove_mob_arrows")){
+                main.addArrow((Arrow) evt.getEntity());
+            }
+        
+        }       
+
     }
     
 }

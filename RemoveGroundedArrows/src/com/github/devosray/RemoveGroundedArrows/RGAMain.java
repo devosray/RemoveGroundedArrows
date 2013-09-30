@@ -22,6 +22,9 @@ public class RGAMain extends JavaPlugin{
         
         getLogger().info("Starting to remove arrows!");
         
+        //Save default config
+        this.saveDefaultConfig();
+        
         //Register listener
         getServer().getPluginManager().registerEvents(listener, this);
         
@@ -43,7 +46,7 @@ public class RGAMain extends JavaPlugin{
                 }
                 
             }
-        }, 0, 5); //Just check arrows every 5 ticks
+        }, 0, Math.round(this.getConfig().getLong("removal_frequency_in_seconds")*20));
     }
     
     @Override

@@ -1,0 +1,12 @@
+                # # # # # # # # # # # # # # # # # 
+                # Remove Grounded Arrows Config #
+                # # # # # # # # # # # # # # # # # 
+                
+remove_dispensed_arrows: true
+
+remove_mob_arrows: true
+
+remove_player_arrows: false
+
+#Interval between checks for 'dead' arrows
+removal_frequency_in_seconds: 1
