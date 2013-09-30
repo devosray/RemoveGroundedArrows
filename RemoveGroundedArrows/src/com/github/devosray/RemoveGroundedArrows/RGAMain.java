@@ -37,7 +37,7 @@ public class RGAMain extends JavaPlugin{
               
                 for (Arrow arw : arrows){
                     //Check if collision with ground
-                    if (arw.isOnGround()){
+                    if (arw.isOnGround() || !arw.isValid()){
                         arw.remove();
                     }
                 }
