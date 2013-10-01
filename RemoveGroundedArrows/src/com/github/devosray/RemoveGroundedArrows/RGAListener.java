@@ -7,6 +7,7 @@ package com.github.devosray.RemoveGroundedArrows;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,23 +31,32 @@ public class RGAListener implements Listener {
         //When an arrow is shot, add it to an array for ground/collision check        
         //Check orgin and compare with config
         
-        //Player
-        if (evt.getEntity().getShooter() instanceof Player && main.getConfig().getBoolean("remove_player_arrows")){
-            main.addArrow((Arrow) evt.getEntity());
-            
-        } else {
-        
-            //Dispenser
-            if (evt.getEntity().getShooter() == null && main.getConfig().getBoolean("remove_dispensed_arrows")){
-                main.addArrow((Arrow) evt.getEntity());
-            }
+        //Bukkit.broadcastMessage(Bukkit.getWorlds().toString());
 
-            //Mob
-            if (evt.getEntity().getShooter() instanceof LivingEntity && main.getConfig().getBoolean("remove_mob_arrows")){
-                main.addArrow((Arrow) evt.getEntity());
-            }
+        //Make sure projectile is an arrow
         
-        }       
+        if (evt.getEntity().getType() == EntityType.ARROW){
+            
+            //Player
+            if (evt.getEntity().getShooter().getType() == EntityType.PLAYER && main.getConfig().getBoolean("remove_player_arrows")){
+                main.addArrow((Arrow) evt.getEntity());
+                
+            } else {
+
+                //Dispenser
+                if (evt.getEntity().getShooter() == null && main.getConfig().getBoolean("remove_dispensed_arrows")){
+                    main.addArrow((Arrow) evt.getEntity());
+                }
+
+                //Mob
+                if (evt.getEntity().getShooter() instanceof LivingEntity 
+                        && evt.getEntity().getShooter().getType() != EntityType.PLAYER
+                        && main.getConfig().getBoolean("remove_mob_arrows")){
+                    main.addArrow((Arrow) evt.getEntity());
+                }
+
+            }
+        }
 
     }
     
